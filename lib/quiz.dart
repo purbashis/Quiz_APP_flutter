@@ -11,6 +11,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  final List<String> selectedAnswer = []; //adding elements to existing list
   var activeScreen = 'start-screen';
   // you can store widget in a variable .
 // @override
@@ -24,6 +25,10 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void chooseAnswer(String answer) {
+    selectedAnswer.add(answer);
+  }
+
   @override
   Widget build(context) {
     // Widget screenWidget = activeScreen == 'start-screen'
@@ -34,7 +39,9 @@ class _QuizState extends State<Quiz> {
 
     if (activeScreen == 'question-screen') {
       setState(() {
-        screenWidget = const QuestionsScreen();
+        screenWidget = QuestionsScreen(
+          onSelectAnswer: chooseAnswer,
+        );
       });
     }
 
